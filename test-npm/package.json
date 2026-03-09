@@ -4,6 +4,10 @@
   "description": "Test package for publish-npm-provenance action",
   "main": "index.js",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovc21/publish-npm-provenance"
+  },
   "publishConfig": {
     "access": "public"
   }
