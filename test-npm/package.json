@@ -1,6 +1,6 @@
 {
   "name": "@lovc21/hello-world-provenance-test",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Test package for publish-npm-provenance action",
   "main": "index.js",
   "license": "ISC",
