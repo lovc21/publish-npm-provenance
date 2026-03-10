@@ -43,7 +43,7 @@ export async function run(): Promise<void> {
     core.info('Skipping version check (strict_version=false)');
   }
 
-  await exec.exec('npm', ['install', '-g', 'pnpm']);
+  await exec.exec('npm', ['install', '-g', 'npm@latest', 'pnpm']);
 
   await exec.exec('pnpm', ['install', '--frozen-lockfile'], { cwd: absProjectDir });
 
