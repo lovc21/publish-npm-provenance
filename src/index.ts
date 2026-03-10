@@ -45,8 +45,17 @@ export async function run(): Promise<void> {
 
   await exec.exec('npm', ['install', '-g', 'pnpm']);
 
-  const homeDir = process.env['HOME'] ?? process.env['USERPROFILE'] ?? '';
-  fs.writeFileSync(path.join(homeDir, '.npmrc'), 'registry=https://registry.npmjs.org/\n');
+  const npmrcDir = process.env['RUNNER_TEMP'] ?? process.cwd();
+  const npmrcPath = path.join(npmrcDir, '.npmrc');
+  fs.writeFileSync(
+    npmrcPath,
+    '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}\nregistry=https://registry.npmjs.org/\n',
+  );
+  core.exportVariable('NPM_CONFIG_USERCONFIG', npmrcPath);
+  core.exportVariable(
+    'NODE_AUTH_TOKEN',
+    process.env['NODE_AUTH_TOKEN'] || 'XXXXX-XXXXX-XXXXX-XXXXX',
+  );
 
   await exec.exec('pnpm', ['install', '--frozen-lockfile'], { cwd: absProjectDir });
 
