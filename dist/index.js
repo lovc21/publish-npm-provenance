@@ -88,7 +88,8 @@ async function run() {
     else {
         core.info('No build script found, skipping build.');
     }
-    const publishArgs = ['publish', '--access', npmAccess, '--no-git-checks'];
+    // Use npm publish for trusted publishing OIDC support
+    const publishArgs = ['publish', '--access', npmAccess];
     if (npmProvenance) {
         publishArgs.push('--provenance');
     }
@@ -96,11 +97,11 @@ async function run() {
     const unstableRegex = new RegExp(regexUnstable);
     if (stableRegex.test(commitTag)) {
         core.info('Publishing STABLE release...');
-        await exec.exec('pnpm', publishArgs, { cwd: absProjectDir });
+        await exec.exec('npm', publishArgs, { cwd: absProjectDir });
     }
     else if (unstableRegex.test(commitTag)) {
         core.info('Publishing BETA release (rc/alpha)...');
-        await exec.exec('pnpm', [...publishArgs, '--tag', 'beta'], { cwd: absProjectDir });
+        await exec.exec('npm', [...publishArgs, '--tag', 'beta'], { cwd: absProjectDir });
     }
     else {
         core.setFailed(`Tag '${commitTag}' does not match stable or unstable pattern.\n` +

@@ -129,8 +129,8 @@ describe('publishing', () => {
     process.env['GITHUB_REF_NAME'] = 'v1.0.0';
     await run();
     expect(mockExec).toHaveBeenCalledWith(
-      'pnpm',
-      ['publish', '--access', 'public', '--no-git-checks'],
+      'npm',
+      ['publish', '--access', 'public'],
       expect.any(Object),
     );
   });
@@ -141,8 +141,8 @@ describe('publishing', () => {
     process.env['GITHUB_REF_NAME'] = 'v1.0.0-rc.1';
     await run();
     expect(mockExec).toHaveBeenCalledWith(
-      'pnpm',
-      ['publish', '--access', 'public', '--no-git-checks', '--tag', 'beta'],
+      'npm',
+      ['publish', '--access', 'public', '--tag', 'beta'],
       expect.any(Object),
     );
   });
@@ -153,7 +153,7 @@ describe('publishing', () => {
     process.env['GITHUB_REF_NAME'] = 'v1.0.0';
     await run();
     expect(mockExec).toHaveBeenCalledWith(
-      'pnpm',
+      'npm',
       expect.arrayContaining(['--provenance']),
       expect.any(Object),
     );
