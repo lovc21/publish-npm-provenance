@@ -27,9 +27,13 @@ jobs:
           # path: app
 ```
 
-## Verifying provenance signature
+## Provenance generation
 
-For full details see the [npm provenance documentation](https://docs.npmjs.com/generating-provenance-statements#verifying-provenance-attestations).
+npm provenance lets you verifiably link a published package back to its source repository and the exact build instructions used to create it. When publishing from GitHub Actions, a signed attestation is generated and uploaded to the npm registry, so consumers can confirm the package wasn't tampered with between source and publish.
+
+See the [official npm provenance docs](https://docs.npmjs.com/generating-provenance-statements) for setup instructions.
+
+### Verifying signature
 
 Run this in any project that has your package as a dependency:
 
